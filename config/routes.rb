@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
-  root "locations#index"
+  root "users#start"
   # Routes for the Review resource:
   # CREATE
+  get "/request", :controller => "users", :action => "reqs"
+
+
   get "/reviews/new", :controller => "reviews", :action => "new"
   post "/create_review", :controller => "reviews", :action => "create"
 
@@ -36,6 +39,12 @@ Rails.application.routes.draw do
   #------------------------------
 
   devise_for :users
+
+  get "/start", :controller => "users", :action => "start"
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

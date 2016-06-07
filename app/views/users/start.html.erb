@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h3>Welcome <%= current_user.username %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/request">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Start Location
+        </label>
+
+        <%= select_tag(:start_address, options_from_collection_for_select(@locations, :address, :name), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for destination -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Destination
+        </label>
+
+        <%= select_tag(:destination_address, options_from_collection_for_select(@locations, :address, :name), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-success">
+        Request Pricing
+      </button>
+
+    </form>
+  </div>
+</div>

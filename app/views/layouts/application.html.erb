@@ -14,8 +14,8 @@
     }
   </style>
 
-  <%= stylesheet_link_tag    "application.css", :media => "all" %>
-  <%= javascript_include_tag "application.js" %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -40,14 +40,19 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <li><a href="/locations">My Rides</a></li>
           <li><a href="/reviews">Reviews</a></li>
-          <li><a href="/locations">Locations</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/users/edit">Dummy Edit Profile Link</a></li>
-          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Dummy Sign Out Link</a></li>
+          <% if current_user.present? %>
+          <li><a href="/users/edit"><i class="fa fa-fw fa-edit"></i><%= current_user.username.capitalize %></a></li>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-fw fa-sign-out"></i>Sign Out</a></li>
+          <% else %>
+          <li><a href="/users/sign_in">Sign In</a></li>
+          <li><a href="/users/sign_up">Sign Up</a></li>
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>

@@ -11,25 +11,22 @@
       <tr>
         <th>Name</th>
         <th>Address</th>
-        <th>Lat</th>
-        <th>Lng</th>
-        <th>User</th>
+
         <th>Actions</th>
       </tr>
 
       <% @locations.each do |location| %>
+      <% if location.user_id == current_user.id%>
       <tr>
         <td><%= location.name %></td>
         <td><%= location.address %></td>
-        <td><%= location.lat %></td>
-        <td><%= location.lng %></td>
-        <td><%= location.user_id %></td>
         <td>
           <a href="/locations/<%= location.id %>" class="btn btn-primary">Show</a>
           <a href="/locations/<%= location.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_location/<%= location.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
+      <% end %>
       <% end %>
     </table>
   </div>

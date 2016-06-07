@@ -36,31 +36,11 @@
         <textarea id="address" name="address" placeholder="Address" class="form-control" rows="3"><%= @location.address %></textarea>
       </div>
 
-      <!-- Label and input for lat -->
-      <div class="form-group">
-        <label for="lat" class="control-label">
-          Lat
-        </label>
-
-        <input type="text" id="lat" name="lat" placeholder="Lat" class="form-control" value="<%= @location.lat %>">
-      </div>
-
-      <!-- Label and input for lng -->
-      <div class="form-group">
-        <label for="lng" class="control-label">
-          Lng
-        </label>
-
-        <input type="text" id="lng" name="lng" placeholder="Lng" class="form-control" value="<%= @location.lng %>">
-      </div>
 
       <!-- Label and input for user_id -->
       <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @location.user_id %>">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
       </div>
 
       <button class="btn btn-success">
