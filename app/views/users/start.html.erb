@@ -19,10 +19,15 @@
             <label for="name" class="control-label">
               Start Location
             </label>
+            <p>
+              <input id="current_location" name="current_location" type="checkbox" value="1" /> Current Location</input>
+            </p>
 
-            <%= select_tag(:start_address, options_from_collection_for_select(@locations, :address, :name), :class => "form-control") %>
+
+            <%= select_tag(:start_address, options_from_collection_for_select(@locations, :address, :name), :class => "form-control", prompt: "Where do you want to leave from?") %>
 
           </div>
+
 
           <!-- Label and input for destination -->
           <div class="form-group">
@@ -30,7 +35,7 @@
               Destination
             </label>
 
-            <%= select_tag(:destination_address, options_from_collection_for_select(@locations, :address, :name), :class => "form-control") %>
+            <%= select_tag(:destination_address, options_from_collection_for_select(@locations, :address, :name), :class => "form-control", prompt: "Home, for a good night sleep, or to school to get even smarter?") %>
           </div>
 
           <button class="btn btn-success">

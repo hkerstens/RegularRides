@@ -22,9 +22,14 @@ class UsersController < ApplicationController
   def reqs
     @start = params[:start_address]
     @destination = params[:destination_address]
+    @current =  params[:current_location]
+    @current_address = "Travertijndijk 11, Roosendaal"
 
-    url_safe_street_address_start = URI.encode(@start)
-
+if @current == 1
+  url_safe_street_address_start = URI.encode(@current_address)
+else
+  url_safe_street_address_start = URI.encode(@start)
+end
     url_start = "http://maps.googleapis.com/maps/api/geocode/json?address=#{url_safe_street_address_start}"
     open(url_start)
     raw_data = open(url_start).read
