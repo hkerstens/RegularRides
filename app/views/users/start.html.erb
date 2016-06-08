@@ -22,7 +22,9 @@
             <p>
               <input id="current_location" name="current_location" type="checkbox" value="1" /> Current Location</input>
             </p>
-
+            <div id="geolocation_error"></div>
+            <input id="latitude" type="hidden" name="lat" value="">
+            <input id="longitude" type="hidden" name="lng" value="">
 
             <%= select_tag(:start_address, options_from_collection_for_select(@locations, :address, :name), :class => "form-control", prompt: "Where do you want to leave from?") %>
 
@@ -47,3 +49,25 @@
     </div>
   </div>
   </div>
+
+  <script>
+  $(document).ready(function() {
+    // This code handles the case that HTML5 location doesn't work
+    var output = $("#geolocation_error");
+    if (!navigator.geolocation){
+      output.html("<p>Geolocation is not supported by your browser</p>");
+      return;
+    }
+    function error() {
+      output.html("Unable to retrieve your location");
+    };
+    // This code uses the coordinates to populate form inputs
+    function success(position) {
+      var lat  = position.coords.latitude;
+      var lng = position.coords.longitude;
+      $("#latitude").val(lat);
+      $("#longitude").val(lng);
+    };
+    navigator.geolocation.getCurrentPosition(success, error);
+  });
+  </script>
