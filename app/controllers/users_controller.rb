@@ -23,13 +23,14 @@ class UsersController < ApplicationController
     @start = params[:start_address]
     @destination = params[:destination_address]
     @current =  params[:current_location]
-    @current_address = "Travertijndijk 11, Roosendaal"
+    @current_address = " 633 Clark St, Evanston" #update with current address once Javascript works
 
-if @current == 1
-  url_safe_street_address_start = URI.encode(@current_address)
-else
-  url_safe_street_address_start = URI.encode(@start)
-end
+    if @current.present?
+      url_safe_street_address_start = URI.encode(@current_address)
+    else
+      url_safe_street_address_start = URI.encode(@start)
+    end
+
     url_start = "http://maps.googleapis.com/maps/api/geocode/json?address=#{url_safe_street_address_start}"
     open(url_start)
     raw_data = open(url_start).read
