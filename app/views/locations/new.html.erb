@@ -1,53 +1,57 @@
 <!-- Validation failure messages -->
 <% if @location.errors.any? %>
-  <% @location.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @location.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
-<div class="page-header">
-  <h3>Add Location</h3>
-</div>
-
 <div class="row">
-  <div class="col-md-12">
-    <form action="/create_location" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Add Location
+      </h3>
+    </div>
+    <div class="panel-body">
+      <form action="/create_location" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for name -->
-      <div class="form-group">
-        <label for="name" class="control-label">
-          Name
-        </label>
+        <!-- Label and input for name -->
+        <div class="form-group">
+          <label for="name" class="control-label">
+            Name
+          </label>
 
-        <textarea id="name" name="name" placeholder="Name" class="form-control" rows="3"><%= @location.name %></textarea>
-      </div>
+          <input type="text" id="name" name="name" placeholder="What do you like to name your new location?" class="form-control"><%= @location.name %></input>
+        </div>
 
-      <!-- Label and input for address -->
-      <div class="form-group">
-        <label for="address" class="control-label">
-          Address
-        </label>
+        <!-- Label and input for address -->
+        <div class="form-group">
+          <label for="address" class="control-label">
+            Address
+          </label>
 
-        <textarea id="address" name="address" placeholder="Address" class="form-control" rows="3"><%= @location.address %></textarea>
-      </div>
+          <input type="text" id="address" name="address" placeholder="What is the address of your new location?" class="form-control"><%= @location.address %></input>
+        </div>
 
 
-      <!-- Label and input for user_id -->
-      <div class="form-group">
+        <!-- Label and input for user_id -->
+        <div class="form-group">
 
-        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
-      </div>
+          <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+        </div>
 
-      <button class="btn btn-success">
-        Create Location
-      </button>
-      or
-      <a href="/locations">Cancel</a>
-    </form>
+        <button class="btn btn-success">
+          Create Location
+        </button>
+        or
+        <a href="/locations">Cancel</a>
+      </form>
+    </div>
   </div>
-</div>
+  </div>
