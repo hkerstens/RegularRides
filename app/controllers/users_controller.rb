@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'json'
+require 'openssl'
 
 class UsersController < ApplicationController
   def index
@@ -43,5 +44,30 @@ class UsersController < ApplicationController
     @lat_destination = parsed_data["results"][0]["geometry"]["location"]["lat"]
 
     @lng_destination = parsed_data["results"][0]["geometry"]["location"]["lng"]
+
+    url_dist = "http://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{@lat_start},#{@lng_start}&destinations=#{@lat_destination},#{@lng_destination}"
+
+    open(url_dist)
+    raw_data = open(url_dist).read
+
+    parsed_data = JSON.parse(open(url_dist).read)
+
+    @meter = parsed_data["rows"][0]["elements"][0]["distance"]["value"]
+
+    @time = parsed_data["rows"][0]["elements"][0]["duration"]["text"]
+
+    @taxi_price = (3.25 + @meter*0.000621371*1.8).round
+
+    url_uber =
+    "https://api.uber.com/v1/estimates/price?start_latitude=#{@lat_start}&start_longitude=#{@lng_start}&end_latitude=#{@lat_destination}&end_longitude=#{@lng_destination}&server_token=9RslzbBhqrEZSdLkLG2oaeNxX_4LCjUF2hfuscqi"
+
+    open(url_uber)
+    raw_data = open(url_uber).read
+
+    parsed_data = JSON.parse(open(url_uber).read)
+
+    @uber_price_pool = parsed_data["prices"][0]["estimate"]
+    @uber_price_x = parsed_data["prices"][1]["estimate"]
+
   end
 end
