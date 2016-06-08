@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     @location_address = @location.address
     @lat_current = params[:startLat]
-@lng_current = params[:startLng]
+    @lng_current = params[:startLng]
     url_safe_street_address = URI.encode(@location_address)
 
     url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{url_safe_street_address}"
