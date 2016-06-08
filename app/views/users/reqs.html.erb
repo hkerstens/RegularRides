@@ -1,10 +1,18 @@
 <div class="page-header">
-  <dt>Time Estimate</dt>
-  <dd><%= @time %></dd>
-  <dt>Taxi Price</dt>
-  <dd>$<%= @taxi_price %></dd>
-  <dt>Uber X Price</dt>
-  <dd><%= @uber_price_x %></dd>
-  <dt>Uber Pool Price</dt>
-  <dd><%= @uber_price_pool %></dd>
-</div>
+
+  <table class="table table-striped table-hover">
+    <tr>
+      <th>Time Estimate</th>
+      <th>Taxi Price</th>
+      <th>Uber X Price</th>
+      <th>Uber Pool Price</th>
+    </tr>
+
+    <tr>
+      <td><%= @time %></td>
+      <td>$<%= @taxi_price %></td>
+      <td><%= @uber_price_x %></td>
+      <td><%= @uber_price_pool %></td>
+    </tr>
+    
+  </div>

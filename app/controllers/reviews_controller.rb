@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   def index
     @reviews = Review.all
+    @user = User.find(current_user[:id])
   end
 
   def show
@@ -15,6 +16,7 @@ class ReviewsController < ApplicationController
     @review = Review.new
     @review.body = params[:body]
     @review.user_id = params[:user_id]
+    
 
     if @review.save
       redirect_to "/reviews", :notice => "Review created successfully."
