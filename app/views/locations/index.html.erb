@@ -6,46 +6,56 @@
           My Locations
         </h3>
       </div>
-      <div class="panel-body">
-        <table class="table table-striped table-hover">
-          <tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Actions</th>
-          </tr>
-          <tr>
-            <% @locations.each do |location| %>
-            <% if location.user_id == current_user.id%>
-            <div>
+      <table class="table table-hover">
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <% @locations.each do |location| %>
+          <% if location.user_id == current_user.id%>
+          <div>
 
-              <form  action="/update_location/<%= location.id %>" method="post">
-                <!-- Hidden input for authenticity token to protect from forgery -->
-                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                <td>
-                  <input id="name" name="name" type="text" class="form-control" value="<%= location.name %>" />
-                </td>
-                <td>
-                  <input id="address" name="address" type="text" class="form-control" value="<%= location.address %>" />
-                  <input id="user_id" name="user_id" type="hidden" value="<%= location.user_id %>" />
-                </td>
-                <td>
-                  <button class="btn btn-warning">Save</button>
-                  <a href="/locations/<%= location.id %>" class="btn btn-primary">Show</a>
-                  <a href="/delete_location/<%= location.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-                </td>
-              </form>
-            </div>
-          </tr>
-          <% end %>
-          <% end %>
-        </table>
-        <div class="row">
-          <a href="/locations/new" class="btn btn-default btn-block">
-            <i class="fa fa-plus"></i>
-          </a>
-        </div>
-      </div>
+            <form  action="/update_location/<%= location.id %>" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+              <td>
+                <input id="name" name="name" type="text" class="form-control" value="<%= location.name %>" />
+              </td>
+              <td>
+                <input id="address" name="address" type="text" class="form-control" value="<%= location.address %>" />
+                <input id="user_id" name="user_id" type="hidden" value="<%= location.user_id %>" />
+              </td>
+              <td>
+                <button class="btn btn-success">Save</button>
+                <a href="/locations/<%= location.id %>" class="btn btn-primary">Show</a>
+                <a href="/delete_location/<%= location.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+              </td>
+            </form>
+          </div>
+        </tr>
+        <% end %>
+        <% end %>
+        <form  action="/create_location" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <td>
+            <input id="name" name="name" type="text" class="form-control" placeholder="Add new location" />
+          </td>
+          <td>
+            <input id="address" name="address" type="text" class="form-control" placeholder="Add new location" />
+            <input id="user_id" name="user_id" type="hidden" value="<%= current_user.id %>" />
+          </td>
+          <td>
+            <button class="btn btn-success">Save</button>
+          </td>
+        </form>
+      </table>
+
+
     </div>
   </div>
+
 </div>
 </div>

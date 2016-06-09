@@ -1,38 +1,76 @@
-<div class="page-header">
-  <h1>Location <%= @location.name %></h1>
+<style>
+#map {
+  width: 500px;
+  height: 400px;
+}
+</style>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <h3><%= @location.name %>
+          </h3>
+        </div>
+        <div class="panel-body">
+
+          <dl class="dl-horizontal">
+            <dt>Name</dt>
+            <dd><%= @location.name %></dd>
+
+            <dt>Address</dt>
+            <dd><%= @location.address %></dd>
+
+            <dt>Latitude</dt>
+            <dd><%= @latitute %></dd>
+
+            <dt>Longitude</dt>
+            <dd><%= @longitude %></dd>
+          </dl>
+          <div id="map" class="well"></div>
+          <script>
+          function initMap() {
+            var mapDiv = document.getElementById('map');
+            var map = new google.maps.Map(mapDiv, {
+              center: {lat: <%= @latitute %>, lng: <%= @longitude %>},
+              zoom: 13
+            });
+
+
+            var infowindow = new google.maps.InfoWindow({
+              content: "<b> <%= @location.name %> </b>"  +
+              "<li><%= @location.address %> </li>"
+            });
+
+            var marker = new google.maps.Marker({
+              position: {lat: <%= @latitute %>, lng: <%= @longitude %>},
+              map: map,
+              title: "<%= @location.name %>",
+              icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+            });
+
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            });
+
+          };
+
+          </script>
+          <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 </div>
-
-<dl class="dl-horizontal">
-  <dt>Name</dt>
-  <dd><%= @location.name %></dd>
-
-  <dt>Address</dt>
-  <dd><%= @location.address %></dd>
-
-  <dt>Latitude</dt>
-  <dd><%= @latitute %></dd>
-
-  <dt>Longitude</dt>
-  <dd><%= @longitude %></dd>
-
-
-</dl>
-
-<div class="btn-group btn-group-justified">
-  <a href="/locations" class="btn btn-primary">
-    Back
-  </a>
-  <a href="/locations/<%= @location.id %>/edit" class="btn btn-warning">
-    Edit
-  </a>
-  <a href="/delete_location/<%= @location.id %>" class="btn btn-danger" rel="nofollow">
-    Delete
-  </a>
-</div>
-
-
-<form>
-
-
-  <button>Check In</button>
-</form>
+          <div class="btn-group btn-group-justified">
+            <a href="/locations" class="btn btn-primary">
+              Back
+            </a>
+            <a href="/locations/<%= @location.id %>/edit" class="btn btn-warning">
+              Edit
+            </a>
+            <a href="/delete_location/<%= @location.id %>" class="btn btn-danger" rel="nofollow">
+              Delete
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
