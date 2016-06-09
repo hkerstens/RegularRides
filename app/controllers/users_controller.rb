@@ -60,30 +60,35 @@ class UsersController < ApplicationController
 
         @lng_destination = parsed_data["results"][0]["geometry"]["location"]["lng"]
 
-        url_dist = "http://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{@lat_start},#{@lng_start}&destinations=#{@lat_destination},#{@lng_destination}"
+        if @lat_destination == @lat_start && @lng_start == @lng_destination
+          redirect_to "/start", :notice => 'Start and destination are the same, not need for a car!'
+        else
 
-        open(url_dist)
-        raw_data = open(url_dist).read
+          url_dist = "http://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=#{@lat_start},#{@lng_start}&destinations=#{@lat_destination},#{@lng_destination}"
 
-        parsed_data = JSON.parse(open(url_dist).read)
+          open(url_dist)
+          raw_data = open(url_dist).read
 
-        @meter = parsed_data["rows"][0]["elements"][0]["distance"]["value"]
+          parsed_data = JSON.parse(open(url_dist).read)
 
-        @time = parsed_data["rows"][0]["elements"][0]["duration"]["text"]
+          @meter = parsed_data["rows"][0]["elements"][0]["distance"]["value"]
 
-        @taxi_price = (3.25 + @meter*0.000621371*1.8).round
+          @time = parsed_data["rows"][0]["elements"][0]["duration"]["text"]
 
-        url_uber =
-        "https://api.uber.com/v1/estimates/price?start_latitude=#{@lat_start}&start_longitude=#{@lng_start}&end_latitude=#{@lat_destination}&end_longitude=#{@lng_destination}&server_token=9RslzbBhqrEZSdLkLG2oaeNxX_4LCjUF2hfuscqi"
+          @taxi_price = (3.25 + @meter*0.000621371*1.8).round
 
-        open(url_uber)
-        raw_data = open(url_uber).read
+          url_uber =
+          "https://api.uber.com/v1/estimates/price?start_latitude=#{@lat_start}&start_longitude=#{@lng_start}&end_latitude=#{@lat_destination}&end_longitude=#{@lng_destination}&server_token=9RslzbBhqrEZSdLkLG2oaeNxX_4LCjUF2hfuscqi"
 
-        parsed_data = JSON.parse(open(url_uber).read)
+          open(url_uber)
+          raw_data = open(url_uber).read
 
-        @uber_price_pool = parsed_data["prices"][0]["estimate"]
-        @uber_price_x = parsed_data["prices"][1]["estimate"]
+          parsed_data = JSON.parse(open(url_uber).read)
 
+          @uber_price_pool = parsed_data["prices"][0]["estimate"]
+          @uber_price_x = parsed_data["prices"][1]["estimate"]
+
+        end
       end
     end
   end
