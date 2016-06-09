@@ -38,7 +38,7 @@ class LocationsController < ApplicationController
     @location.user_id = params[:user_id]
 
     if @location.save
-      redirect_to "/start", :notice => "Location created successfully."
+      redirect_to "/locations", :notice => "Location created successfully."
     else
       render 'new'
     end
@@ -58,7 +58,7 @@ class LocationsController < ApplicationController
     @location.user_id = params[:user_id]
 
     if @location.save
-      redirect_to "/locations", :notice => "Location updated successfully."
+      redirect_to :back, :notice => "Location updated successfully."
     else
       render 'edit'
     end
