@@ -12,6 +12,9 @@
   <div class="col-md-8 col-md-offset-2">
 
     <% @reviews.each do |review| %>
+    <% if review.user_id == current_user.id%>
+    <!-- true -->
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -25,14 +28,13 @@
         <p>
           <%= review.body %>
         </p>
-        <%if review.user.id == current_user.id%>
+        
         <a href="/reviews/<%= review.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
         <a href="/delete_review/<%= review.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-times" aria-hidden="true"></i></a>
-        <% end %>
       </div>
     </div>
     <% end %>
-
+    <% end %>
 
 
   </div>
