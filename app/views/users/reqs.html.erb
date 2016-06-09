@@ -1,26 +1,36 @@
-<div class="page-header">
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          Pricing!!
+        </h3>
+      </div>
+      <table class="table">
 
-  <table class="table table-striped table-hover">
-    <tr>
-      <th>Time Estimate</th>
-      <th>Taxi Price</th>
-      <th>Uber X Price</th>
-      <th>Uber Pool Price</th>
-    </tr>
 
-    <tr>
-      <td><%= @time %></td>
-      <td>$<%= @taxi_price %></td>
-      <td><%= @uber_price_x %></td>
-      <td><%= @uber_price_pool %></td>
-    </tr>
+        <tr>
+          <th>Time Estimate</th>
+          <th>Taxi Price</th>
+          <th>Uber X Price</th>
+          <th>Uber Pool Price</th>
+        </tr>
 
-    <tr>
-      <td></td>
-      <td>Walk outside and hail a cab!</td>
-      <!-- #normally this would link to an app to be opened with //uber, but as we are not testing on a phone, I have connected it to the Uber website, for the idea. -->
-      <td><button class ="btn btn-success"><a href="http://www.uber.com">Go To Uber</a></button></td>
-      <td><button class ="btn btn-success"><a href="http://www.uber.com">Go To Uber</a></button></td>
-    </tr>
+        <tr>
+          <td><%= @time %></td>
+          <td>$<%= @taxi_price %></td>
+          <td><%= @uber_price_x %></td>
+          <td><%= @uber_price_pool %></td>
+        </tr>
 
+        <tr>
+          <td></td>
+          <td>Walk outside and hail a cab!</td>
+          <!-- #normally this would link to an app to be opened with //uber, but as we are not testing on a phone, I have connected it to the Uber website, for the idea. -->
+          <td><button class ="btn btn-success"><a href="http://www.uber.com">Go To Uber</a></button></td>
+          <td><button class ="btn btn-success"><a href="http://www.uber.com">Go To Uber</a></button></td>
+        </tr>
+
+      </div>
+    </div>
   </div>

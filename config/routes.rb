@@ -43,7 +43,6 @@ Rails.application.routes.draw do
 
   get "/start", :controller => "users", :action => "start"
   get "/users", :controller => "users", :action => "index"
-  get "/users/:id", :controller => "users", :action => "show"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
