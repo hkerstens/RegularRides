@@ -58,7 +58,7 @@ class LocationsController < ApplicationController
     @location.user_id = params[:user_id]
 
     if @location.save
-      redirect_to :back, :notice => "Location updated successfully."
+      redirect_to "/locations", :notice => "Location updated successfully."
     else
       render 'edit'
     end

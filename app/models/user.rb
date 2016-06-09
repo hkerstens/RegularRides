@@ -7,6 +7,6 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
 
-  has_many :locations
-  has_many :reviews
+  has_many :locations, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
 end
